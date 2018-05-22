@@ -14,21 +14,18 @@ public class FourSquare implements EnvironmentAware {
     private final RestTemplate restTemplate;
     private String client_secret;
     private String client_id;
-    private Environment environment;
 
     public FourSquare(RestTemplateBuilder restTemplateBuilder) {
-        restTemplate = restTemplateBuilder
-                .errorHandler(new ErrorHandler())
-                .build();
+        restTemplate = restTemplateBuilder.build();
     }
 
-    public String venues() {
+    public String venues(String name) {
         URI uri = UriComponentsBuilder
                 .fromHttpUrl("https://api.foursquare.com/v2/venues/explore")
                 .queryParam("client_id", client_id)
                 .queryParam("client_secret", client_secret)
                 .queryParam("v", "20180323")
-                .queryParam("near", "London")
+                .queryParam("near", name)
                 .build().toUri();
         return restTemplate.getForObject(uri, String.class);
     }

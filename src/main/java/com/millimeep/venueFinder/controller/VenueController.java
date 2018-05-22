@@ -1,13 +1,12 @@
 package com.millimeep.venueFinder.controller;
 
 
-import java.util.concurrent.atomic.AtomicLong;
-
-import com.millimeep.venueFinder.api.VenueFinder;
 import com.millimeep.venueFinder.services.FourSquare;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
 public class VenueController {
@@ -19,8 +18,8 @@ public class VenueController {
         this.fourSquare = fourSquare;
     }
 
-    @RequestMapping("/venue")
-    public VenueFinder venues(@RequestParam(value = "name", defaultValue = "World") String name) {
-        return new VenueFinder(counter.incrementAndGet(), fourSquare.venues());
+    @RequestMapping(value = "/venue", produces = "application/json")
+    public String venues(@RequestParam(value = "name", defaultValue = "World") String name) {
+        return fourSquare.venues(name);
     }
 }
