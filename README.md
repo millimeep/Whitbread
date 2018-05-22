@@ -22,7 +22,7 @@ export client_secret=<your client secret>
 ```
 * Run the `Venue Finder`:
 ```bash
-gradle bootRun
+./gradlew bootRun
 
 ```
 In your browser, navigate to http://localhost:8080/venue?name=Redhill and you should see the JSON containing recommended venues
